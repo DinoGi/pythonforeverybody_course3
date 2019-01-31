@@ -1,0 +1,29 @@
+# Python for Everybody 
+# Using Python to Access Web Data
+# Class of Week 4
+# Assignment 12.5
+# Scraping HTML Data with BeautifulSoup
+
+import urllib.request, urllib.parse, urllib.error
+import re
+import ssl
+from bs4 import BeautifulSoup
+
+# Ignore SSL certificate errors
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+url = input('Enter a link: ')
+html = urllib.request.urlopen(url, context=ctx).read()
+soup = BeautifulSoup(html, 'html.parser')
+
+# Retrieve all the number
+sum = 0
+tags = soup('span')
+for tag in tags:
+    y = str(tag)
+    x = re.findall('[0-9]+', y)
+    for i in x:
+        sum = sum + int(i)
+print(sum)
