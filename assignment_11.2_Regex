@@ -1,0 +1,30 @@
+# Python for Everybody 
+# Using Python to Access Web Data
+# Class of Week 2
+# Assignment 11.2
+# Extracting Data With Regular Expressions
+"""
+import re
+fname = input('Enter file:')
+try:
+    handle = open(fname)
+except:
+    print('This file cannot be opened')
+    exit()
+lst = []
+total = 0
+for line in handle:
+    line = line.strip()
+    x = re.findall(('[0-9]+'), line)
+    if len(x) > 1:
+        for i in x:
+            lst.append(i)
+    elif len(x) == 1:
+        lst.append(x[0])
+
+for item in lst:
+    total = total + int(item)
+
+print(total)
+
+
